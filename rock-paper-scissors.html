@@ -14,7 +14,7 @@
         return choices[Math.floor((Math.random() * 3))];
     }
 
-    function playGround(playerSelection, computerSelection) {
+    function playGround(playerSelection, computerSelection, playerPoint, computerPoint) {
         playerSelection = playerSelection.toLowerCase();
         let result;
         if (playerSelection === (computerSelection)) {
@@ -24,25 +24,31 @@
             if (playerSelection === "rock") {
                 if (computerSelection === 'scissors') {
                     result = 'You Win! Rock beats Scissors';
+                    playerPoint += 1;
                 }
                 else {
                     result = "You Lose! Paper beats Rock"
+                    computerPoint += 1;
                 }
             }
             else if (playerSelection === 'scissors') {
                 if (computerSelection === 'paper') {
                     result = 'You Win! Scissors beats Paper';
+                    playerPoint += 1;
                 }
                 else {
                     result = "You Lose! Rock beats Scissors"
+                    computerPoint += 1;
                 }
             }
             else  {
                 if (computerSelection === 'rock') {
                     result = 'You Win! Paper beats Rock';
+                    playerPoint += 1;
                 }
                 else {
                     result = "You Lose! Scissors beats Paper"
+                    computerPoint += 1;
                 }
             }
             
@@ -51,10 +57,22 @@
     }
     
     function game() {
+        let playerPoint = 0, computerPoint = 0;
         for (let i = 0; i < 5; i += 1) {
             let playerSelection = window.prompt("Rock, Paper, or Scissors?");
             let computerSelection = getComputerChoice();
-            console.log(playGround(playerSelection.toLowerCase(),computerSelection));
+            console.log(playGround(playerSelection.toLowerCase(),computerSelection,playerPoint,computerPoint));
+        }
+
+        if (playerPoint > computerPoint) {
+            console.log("Overall...YOU WIN!")
+        }
+        else if (playerPoint < computerPoint) {
+            console.log("Overall...YOU LOSE!");
+
+        }
+        else {
+            console.log("Overall...TIE!");
         }
     }
     game();
