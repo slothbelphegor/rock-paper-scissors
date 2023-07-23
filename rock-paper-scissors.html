@@ -11,9 +11,48 @@
 <script>
     function getComputerChoice() {
         const choices = ['rock','paper','scissors'];
-        //console.log([Math.floor((Math.random() * 3))])
         return choices[Math.floor((Math.random() * 3))];
     }
-    getComputerChoice();
+
+    function playGround(playerSelection, computerSelection) {
+        playerSelection = playerSelection.toLowerCase();
+        let result;
+        if (playerSelection === (computerSelection)) {
+            result = "Tie!"
+        }
+        else {
+            if (playerSelection === "rock") {
+                if (computerSelection === 'scissors') {
+                    result = 'You Win! Rock beats Scissors';
+                }
+                else {
+                    result = "You Lose! Paper beats Rock"
+                }
+            }
+            else if (playerSelection === 'scissors') {
+                if (computerSelection === 'paper') {
+                    result = 'You Win! Scissors beats Paper';
+                }
+                else {
+                    result = "You Lose! Rock beats Scissors"
+                }
+            }
+            else  {
+                if (computerSelection === 'rock') {
+                    result = 'You Win! Paper beats Rock';
+                }
+                else {
+                    result = "You Lose! Scissors beats Paper"
+                }
+            }
+            
+        }
+        return result;
+    }
+    const playerSelection = 'paper';
+    const computerSelection = getComputerChoice();
+    console.log(computerSelection);
+    console.log(playGround(playerSelection, computerSelection));
+    
 </script>
-</html>
+</html> 
