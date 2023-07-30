@@ -11,6 +11,7 @@
     <button id="btn_rock">Rock</button>
     <button id="btn_paper">Paper</button>
     <button id="btn_scissors">Scissors</button>
+    <div id="divResult"></div>
     
 </body>
 <script>
@@ -70,14 +71,20 @@
 
         
 
-        let playerSelection = window.prompt("Rock, Paper, or Scissors?");
-        let computerSelection = getComputerChoice();
-        console.log(playGround(playerSelection.toLowerCase(), computerSelection, playerPoint, computerPoint));
+       let playerSelection;
+       let computerSelection;
+        //console.log(playGround(playerSelection.toLowerCase(), computerSelection, playerPoint, computerPoint));
 
         buttons.forEach((button) => {
             button.addEventListener('click', (e) => {
                 playerSelection = e.target.innerHTML.toLowerCase();
-                console.log(playGround(playerSelection,computerSelection));
+                computerSelection = getComputerChoice();
+                //console.log(playGround(playerSelection,computerSelection));
+                const divResult = document.querySelector('#divResult')
+                const result = document.createElement('p');
+                result.classList.add('result');
+                result.textContent = playGround(playerSelection,computerSelection);
+                divResult.appendChild(result);
             });
         });
 
