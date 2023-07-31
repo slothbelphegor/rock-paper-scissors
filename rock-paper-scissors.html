@@ -12,7 +12,7 @@
     <button id="btn_paper">Paper</button>
     <button id="btn_scissors">Scissors</button>
     <div id="divResult"></div>
-    
+
 </body>
 <script>
     function getComputerChoice() {
@@ -20,84 +20,102 @@
         return choices[Math.floor((Math.random() * 3))];
     }
 
-    function playGround(playerSelection, computerSelection, playerPoint, computerPoint) {
-        playerSelection = playerSelection.toLowerCase();
-        let result;
-        if (playerSelection === (computerSelection)) {
-            result = "Tie!"
-        }
-        else {
-            if (playerSelection === "rock") {
-                if (computerSelection === 'scissors') {
-                    result = 'You Win! Rock beats Scissors';
-                    playerPoint += 1;
-                }
-                else {
-                    result = "You Lose! Paper beats Rock"
-                    computerPoint += 1;
-                }
-            }
-            else if (playerSelection === 'scissors') {
-                if (computerSelection === 'paper') {
-                    result = 'You Win! Scissors beats Paper';
-                    playerPoint += 1;
-                }
-                else {
-                    result = "You Lose! Rock beats Scissors"
-                    computerPoint += 1;
-                }
-            }
-            else {
-                if (computerSelection === 'rock') {
-                    result = 'You Win! Paper beats Rock';
-                    playerPoint += 1;
-                }
-                else {
-                    result = "You Lose! Scissors beats Paper"
-                    computerPoint += 1;
-                }
-            }
-
-        }
-        return result;
+    function increment(value) {
+        return value + 1;
     }
 
-   
+
+
+
 
     function game() {
         let playerPoint = 0, computerPoint = 0;
 
         const buttons = document.querySelectorAll('button');
 
-        
+        function playGround(playerSelection, computerSelection) {
+            playerSelection = playerSelection.toLowerCase();
+            let result;
+            if (playerSelection === (computerSelection)) {
+                result = "Tie!"
+            }
+            else {
+                if (playerSelection === "rock") {
+                    if (computerSelection === 'scissors') {
+                        result = 'You Win! Rock beats Scissors';
+                        playerPoint += 1;
+                    }
+                    else {
+                        result = "You Lose! Paper beats Rock"
+                        computerPoint += 1;
+                    }
+                }
+                else if (playerSelection === 'scissors') {
+                    if (computerSelection === 'paper') {
+                        result = 'You Win! Scissors beats Paper';
+                        playerPoint += 1;
+                    }
+                    else {
+                        result = "You Lose! Rock beats Scissors"
+                        computerPoint += 1;
+                    }
+                }
+                else {
+                    if (computerSelection === 'rock') {
+                        result = 'You Win! Paper beats Rock';
+                        playerPoint += 1;
+                    }
+                    else {
+                        result = "You Lose! Scissors beats Paper"
+                        computerPoint += 1;
+                    }
+                }
 
-       let playerSelection;
-       let computerSelection;
+            }
+            return result;
+        }
+
+
+        let playerSelection;
+        let computerSelection;
+
         //console.log(playGround(playerSelection.toLowerCase(), computerSelection, playerPoint, computerPoint));
 
+        const divResult = document.querySelector('#divResult')
         buttons.forEach((button) => {
             button.addEventListener('click', (e) => {
                 playerSelection = e.target.innerHTML.toLowerCase();
                 computerSelection = getComputerChoice();
                 //console.log(playGround(playerSelection,computerSelection));
-                const divResult = document.querySelector('#divResult')
+
                 const result = document.createElement('p');
                 result.classList.add('result');
-                result.textContent = playGround(playerSelection,computerSelection);
+                result.textContent = playGround(playerSelection, computerSelection);
                 divResult.appendChild(result);
+
+                const points = document.createElement('p');
+                points.classList.add('points');
+                points.textContent = "You: " + playerPoint + "\n" + "Computer: " + computerPoint;
+                divResult.appendChild(points);
             });
         });
 
-        if (playerPoint > computerPoint) {
-            console.log("Overall...YOU WIN!")
+        if (playerPoint > 5 || computerPoint > 5) {
+            const finalResult = document.createElement('p');
+            finalResult.classList.add('finalResult');
+            if (playerPoint > computerPoint) {
+                finalResult.textContent = "Overall...YOU WIN!";
+            }
+            else if (playerPoint < computerPoint) {
+                finalResult.textContent = "Overall...YOU LOSE!";
+            }
+            else {
+                finalResult.textContent = "Overall...TIE!";
+            }
+            //playerPoint = 0; computerPoint = 0;
+            divResult.appendChild(finalResult);
         }
-        else if (playerPoint < computerPoint) {
-            console.log("Overall...YOU LOSE!");
 
-        }
-        else {
-            console.log("Overall...TIE!");
-        }
     }
     game();
 
