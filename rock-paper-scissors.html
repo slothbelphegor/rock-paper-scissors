@@ -82,25 +82,26 @@
         //console.log(playGround(playerSelection.toLowerCase(), computerSelection, playerPoint, computerPoint));
 
         const divResult = document.querySelector('#divResult')
+        let result = document.createElement('p');
+        result.classList.add('result');
+        let points = document.createElement('p');
+        points.classList.add('points');
+        let finalResult = document.createElement('p');
+        finalResult.classList.add('finalResult');
         buttons.forEach((button) => {
             button.addEventListener('click', (e) => {
+                if (divResult.contains(finalResult)) divResult.removeChild(finalResult);
                 playerSelection = e.target.innerHTML.toLowerCase();
                 computerSelection = getComputerChoice();
                 //console.log(playGround(playerSelection,computerSelection));
 
-                const result = document.createElement('p');
-                result.classList.add('result');
                 result.textContent = playGround(playerSelection, computerSelection);
-                divResult.appendChild(result);
+                if (!divResult.contains(result)) divResult.appendChild(result);
 
-                const points = document.createElement('p');
-                points.classList.add('points');
                 points.textContent = "You: " + playerPoint + "\n" + "Computer: " + computerPoint;
-                divResult.appendChild(points);
+                if (!divResult.contains(points)) divResult.appendChild(points);
 
                 if (playerPoint >= 5 || computerPoint >= 5) {
-                    const finalResult = document.createElement('p');
-                    finalResult.classList.add('finalResult');
                     if (playerPoint > computerPoint) {
                         finalResult.textContent = "Overall...YOU WIN!";
                     }
@@ -111,8 +112,11 @@
                         finalResult.textContent = "Overall...TIE!";
                     }
                     playerPoint = 0; computerPoint = 0;
-                    divResult.appendChild(finalResult);
+                    
+                    if (!divResult.contains(finalResult)) divResult.appendChild(finalResult);
                 }
+
+                
 
             });
         });
