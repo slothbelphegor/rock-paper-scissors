@@ -97,24 +97,26 @@
                 points.classList.add('points');
                 points.textContent = "You: " + playerPoint + "\n" + "Computer: " + computerPoint;
                 divResult.appendChild(points);
+
+                if (playerPoint >= 5 || computerPoint >= 5) {
+                    const finalResult = document.createElement('p');
+                    finalResult.classList.add('finalResult');
+                    if (playerPoint > computerPoint) {
+                        finalResult.textContent = "Overall...YOU WIN!";
+                    }
+                    else if (playerPoint < computerPoint) {
+                        finalResult.textContent = "Overall...YOU LOSE!";
+                    }
+                    else {
+                        finalResult.textContent = "Overall...TIE!";
+                    }
+                    playerPoint = 0; computerPoint = 0;
+                    divResult.appendChild(finalResult);
+                }
+
             });
         });
 
-        if (playerPoint > 5 || computerPoint > 5) {
-            const finalResult = document.createElement('p');
-            finalResult.classList.add('finalResult');
-            if (playerPoint > computerPoint) {
-                finalResult.textContent = "Overall...YOU WIN!";
-            }
-            else if (playerPoint < computerPoint) {
-                finalResult.textContent = "Overall...YOU LOSE!";
-            }
-            else {
-                finalResult.textContent = "Overall...TIE!";
-            }
-            //playerPoint = 0; computerPoint = 0;
-            divResult.appendChild(finalResult);
-        }
 
     }
     game();
