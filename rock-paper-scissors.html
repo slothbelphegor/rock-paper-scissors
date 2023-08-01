@@ -5,12 +5,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            padding: 10px;
+        }
+
+        .buttonContainer {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            gap: 5px;
+        }
+
+    </style>
 </head>
 
 <body>
-    <button id="btn_rock">Rock</button>
-    <button id="btn_paper">Paper</button>
-    <button id="btn_scissors">Scissors</button>
+    <div class="btnContainer">
+        <button id="btn_rock">Rock</button>
+        <button id="btn_paper">Paper</button>
+        <button id="btn_scissors">Scissors</button>
+    </div>
+    
     <div id="divResult"></div>
 
 </body>
